@@ -1,0 +1,22 @@
+#!/bin/bash
+
+TARGET="$(echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | head -n 1)"
+
+if [ -z "$TARGET" ]; then
+  DIR="$(pwd)"
+elif [ -d "$TARGET" ]; then
+  DIR="$TARGET"
+else
+  DIR="$(dirname "$TARGET")"
+fi
+
+FILENAME="Новый документ.txt"
+i=1
+while [ -e "$DIR/$FILENAME" ]; do
+  FILENAME="Новый документ $i.txt"
+  ((i++))
+done
+
+# Создаём файл с одной пустой строкой (или комментарием)
+echo "# " > "$DIR/$FILENAME"
+

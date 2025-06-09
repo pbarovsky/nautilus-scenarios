@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -n "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" ]; then
+  FILE="$(echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | head -n 1)"
+else
+  FILE="$PWD"
+fi
+
+code "$FILE"

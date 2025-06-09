@@ -1,0 +1,17 @@
+#!/bin/bash
+
+TARGET="$(echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | head -n 1)"
+if [ -z "$TARGET" ]; then DIR="$(pwd)"
+elif [ -d "$TARGET" ]; then DIR="$TARGET"
+else DIR="$(dirname "$TARGET")"
+fi
+
+FILENAME="Таблица.xlsx"
+i=1
+while [ -e "$DIR/$FILENAME" ]; do
+  FILENAME="Таблица $i.xlsx"
+  ((i++))
+done
+
+cp ~/.local/share/file-templates/spreadsheet_template.xlsx "$DIR/$FILENAME"
+

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+TARGET="$(echo "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" | head -n 1)"
+if [ -z "$TARGET" ]; then DIR="$(pwd)"
+elif [ -d "$TARGET" ]; then DIR="$TARGET"
+else DIR="$(dirname "$TARGET")"
+fi
+
+FILENAME="Документ.docx"
+i=1
+while [ -e "$DIR/$FILENAME" ]; do
+  FILENAME="Документ $i.docx"
+  ((i++))
+done
+
+cp ~/.local/share/file-templates/docx_template.docx "$DIR/$FILENAME"
+
